@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion of Cryptographic Paradigms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: #1e1e1e;
+            padding: 10px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        nav a.capsule {
+            color: #82aaff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            background-color: #1e1e1e;
+            margin-left: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav a.capsule:hover {
+            background: #333;
+            transform: scale(1.1);
+        }
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+            display: none;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .active {
+            opacity: 1;
+            display: block;
+        }
+        .slider-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .foreword {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #121212;
+            animation: fadeIn 2s ease-in;
+        }
+        .foreword h1 {
+            font-size: 2.5em;
+            color: #82aaff;
+            text-align: center;
+        }
+        .foreword p {
+            font-size: 1.2em;
+            color: #ffffff;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: url('dav_school_logo.png') no-repeat center center;
+            background-size: contain;
+        }
+        .start-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #82aaff;
+            color: #121212;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .start-button:hover {
+            background: #6292e9;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-in;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .intro {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #82aaff;
+        }
+        .section-content {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        canvas {
+            background: #121212;
+        }
+        .grid {
+            background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#foreword" class="nav-link capsule">Foreword</a>
+    <a href="#ecc" class="nav-link capsule">ECC</a>
+    <a href="#hecc" class="nav-link capsule">HECC</a>
+    <a href="#mapping" class="nav-link capsule">MAPPING</a>
+    <a href="#encryption" class="nav-link capsule">ENCRYPTION</a>
+</nav>
+
+<div class="content fade-in active" id="foreword">
+    <div class="foreword">
+        <div class="logo"></div>
+        <h1>Fusion of Cryptographic Paradigms</h1>
+        <p>Theme: Science and Technology for Sustainable Environment</p>
+        <p>Sub Theme: Mathematical Modelling and Computational Thinking</p>
+        <p>Team: Vishnu Chandar and Harshavardhan</p>
+        <button class="start-button" onclick="navigateTo('ecc')">Start</button>
+    </div>
+</div>
+<div class="content" id="ecc">
+    <h1 class="section-title">Elliptic Curve Cryptography (ECC)</h1>
+    <div class="intro">
+        <p class="section-content">
+            Elliptic Curve Cryptography (ECC) is a form of public-key cryptography based on the algebraic structure of elliptic curves over finite fields. ECC is widely regarded as providing the same level of security as traditional cryptosystems, but with much smaller key sizes, making it highly efficient.
+        </p>
+        <p class="section-content">
+            The security of ECC is derived from the difficulty of the Elliptic Curve Discrete Logarithm Problem (ECDLP). ECC is used in various applications such as secure web communication (SSL/TLS), cryptocurrencies, and mobile devices due to its efficiency and lower computational requirements.
+        </p>
+        <p class="section-content">
+            ECC enables the implementation of secure key exchange protocols, such as Elliptic Curve Diffie-Hellman (ECDH), and digital signature algorithms, like the Elliptic Curve Digital Signature Algorithm (ECDSA). These protocols are crucial for maintaining data integrity and confidentiality in modern digital communication.
+        </p>
+        <p class="section-content">
+            The elliptic curve equation used in ECC is typically of the form: y^2 = x^3 + ax + b. By manipulating the constants 'a' and 'b', one can observe different elliptic curves and understand the underlying cryptographic principles.
+        </p>
+        <img src="https://example.com/ecc_image.png" alt="ECC Diagram" style="max-width:100%;">
+    </div>
+    <canvas id="ellipticCurveCanvas" class="grid" width="600" height="400"></canvas>
+    <div class="slider-container">
+        <label for="a">Constant a:</label>
+        <input type="range" id="a" name="a" min="-10" max="10" value="1">
+        <span id="a-value">1</span>
+    </div>
+    <div class="slider-container">
+        <label for="b">Constant b:</label>
+        <input type="range" id="b" name="b" min="-10" max="10" value="1">
+        <span id="b-value">1</span>
+    </div>
+</div>
+
+<div class="content" id="hecc">
+    <h1 class="section-title">Hyperelliptic Curve Cryptography (HECC)</h1>
+    <div class="intro">
+        <p class="section-content">
+            Hyperelliptic Curve Cryptography (HECC) is an extension of ECC that uses hyperelliptic curves, which are more complex and provide higher security for the same key sizes. HECC is based on the difficulty of the Hyperelliptic Curve Discrete Logarithm Problem (HCDLP).
+        </p>
+        <p class="section-content">
+            HECC is still an area of research, but it offers potential advantages in terms of security and efficiency. Hyperelliptic curves can have genus greater than one, providing a larger field for cryptographic applications.
+        </p>
+        <p class="section-content">
+            The use of hyperelliptic curves allows for the creation of cryptographic protocols with high security and efficiency. These protocols are useful in environments where resource constraints are critical.
+        </p>
+        <p class="section-content">
+            The equation of a hyperelliptic curve is of the form: y^2 = x^5 + ax^3 + bx + c. By manipulating the constants 'a', 'b', and 'c', one can study the behavior of hyperelliptic curves and their cryptographic properties.
+        </p>
+        <img src="https://example.com/hecc_image.png" alt="HECC Diagram" style="max-width:100%;">
+    </div>
+    <canvas id="hyperellipticCurveCanvas" class="grid" width="600" height="400"></canvas>
+    <div class="slider-container">
+        <label for="hea">Constant a:</label>
+        <input type="range" id="hea" name="a" min="-10" max="10" value
+        <label for="hea">Constant a:</label>
+        <input type="range" id="hea" name="a" min="-10" max="10" value="1">
+        <span id="hea-value">1</span>
+    </div>
+    <div class="slider-container">
+        <label for="heb">Constant b:</label>
+        <input type="range" id="heb" name="b" min="-10" max="10" value="1">
+        <span id="heb-value">1</span>
+    </div>
+    <div class="slider-container">
+        <label for="hec">Constant c:</label>
+        <input type="range" id="hec" name="c" min="-10" max="10" value="1">
+        <span id="hec-value">1</span>
+    </div>
+</div>
+
+<div class="content" id="mapping">
+    <h1 class="section-title">Mapping Hyperelliptic Curves to Elliptic Curves</h1>
+    <div class="intro">
+        <p class="section-content">
+            Mapping hyperelliptic curves to elliptic curves is an important process in cryptography, allowing the use of simpler elliptic curve cryptographic techniques for more complex hyperelliptic curves. This process involves finding a suitable mapping function that transforms points on a hyperelliptic curve to points on an elliptic curve while preserving cryptographic properties.
+        </p>
+        <p class="section-content">
+            The importance of this mapping lies in its ability to leverage the well-studied and efficient algorithms of ECC while dealing with the security and mathematical complexity of HECC. By using such mappings, cryptographers can optimize cryptographic protocols for better performance and security.
+        </p>
+        <p class="section-content">
+            One common approach to this mapping is to use a birational transformation, which preserves the structure and properties of the original curve. These transformations are computationally efficient and can be easily implemented in cryptographic algorithms.
+        </p>
+        <p class="section-content">
+            The animation below demonstrates the continuous mapping of a hyperelliptic curve to an elliptic curve. You can manipulate the mapping using the provided controls to better understand the process and its impact on the curve's properties.
+        </p>
+        <p class="section-content">
+            Understanding this mapping process is crucial for cryptographers and researchers working with advanced cryptographic techniques. It provides insights into the relationship between different types of curves and their applications in secure communication.
+        </p>
+        <img src="https://example.com/mapping_image.png" alt="Mapping Diagram" style="max-width:100%;">
+    </div>
+    <canvas id="mappingCanvas" class="grid" width="600" height="400"></canvas>
+    <div class="slider-container">
+        <label for="mapA">Mapping Constant A:</label>
+        <input type="range" id="mapA" name="mapA" min="-10" max="10" value="1">
+        <span id="mapA-value">1</span>
+    </div>
+    <div class="slider-container">
+        <label for="mapB">Mapping Constant B:</label>
+        <input type="range" id="mapB" name="mapB" min="-10" max="10" value="1">
+        <span id="mapB-value">1</span>
+    </div>
+    <div class="slider-container">
+        <label for="mapC">Mapping Constant C:</label>
+        <input type="range" id="mapC" name="mapC" min="-10" max="10" value="1">
+        <span id="mapC-value">1</span>
+    </div>
+</div>
+
+<div class="content" id="encryption">
+    <h1 class="section-title">Encryption Using Hyperelliptic to Elliptic Curve Mapping</h1>
+    <div class="intro">
+        <p class="section-content">
+            The encryption process using the mapping of hyperelliptic curves onto elliptic curves leverages the complexity and security of hyperelliptic curves while utilizing the efficient cryptographic techniques of elliptic curves. This method combines the best of both worlds, providing robust security and efficiency.
+        </p>
+        <p class="section-content">
+            The mapping function transforms points from the hyperelliptic curve to the elliptic curve, allowing for encryption to be performed on the elliptic curve. This approach simplifies the encryption process while maintaining the high level of security provided by the hyperelliptic curve.
+        </p>
+        <p class="section-content">
+            Once the mapping is established, traditional elliptic curve encryption methods, such as ECC-based public key cryptography, can be employed. This includes key exchange protocols and digital signatures, ensuring secure communication.
+        </p>
+        <p class="section-content">
+            The continuous animation below demonstrates the encryption process, where you can input a message, and it will be encrypted using the mapped elliptic curve. Manipulate the mapping constants to see how they affect the encryption.
+        </p>
+        <p class="section-content">
+            This innovative encryption method provides an extra layer of security, combining the strengths of both hyperelliptic and elliptic curves. It is particularly useful in scenarios requiring high security with efficient computation.
+        </p>
+        <img src="https://example.com/encryption_image.png" alt="Encryption Diagram" style="max-width:100%;">
+    </div>
+    <div class="container">
+        <textarea id="inputMessage" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
+        <button class="start-button" onclick="encryptMessage()">Encrypt</button>
+        <textarea id="outputMessage" rows="4" cols="50" placeholder="Encrypted message will appear here..." readonly></textarea>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contents = document.querySelectorAll('.content');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === targetId) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        window.navigateTo = function(sectionId) {
+            contents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === sectionId) {
+                    content.classList.add('active');
+                }
+            });
+        };
+
+        // ECC
+        const eccCanvas = document.getElementById('ellipticCurveCanvas');
+        const eccCtx = eccCanvas.getContext('2d');
+
+        const aSlider = document.getElementById('a');
+        const bSlider = document.getElementById('b');
+        const aValue = document.getElementById('a-value');
+        const bValue = document.getElementById('b-value');
+
+        aSlider.addEventListener('input', updateECCurve);
+        bSlider.addEventListener('input', updateECCurve);
+
+        function drawEllipticCurve(a, b) {
+            eccCtx.clearRect(0, 0, eccCanvas.width, eccCanvas.height);
+            eccCtx.beginPath();
+            for (let x = -10; x <= 10; x += 0.01) {
+                let y = Math.sqrt(Math.pow(x, 3) + a * x + b);
+                let negY = -Math.sqrt(Math.pow(x, 3) + a * x + b);
+                if (!isNaN(y)) {
+                    eccCtx.moveTo(x * 30 + 300, -y * 30 + 200);
+                    eccCtx.lineTo(x * 30 + 300, -negY * 30 + 200);
+                }
+            }
+            eccCtx.strokeStyle = '#82aaff';
+            eccCtx.fillStyle = '#121212';
+            eccCtx.fill();
+            eccCtx.stroke();
+        }
+
+        function updateECCurve() {
+            const a = parseFloat(aSlider.value);
+            const b = parseFloat(bSlider.value);
+            aValue.textContent = a;
+            bValue.textContent = b;
+            drawEllipticCurve(a, b);
+        }
+
+        drawEllipticCurve(parseFloat(aSlider.value), parseFloat(bSlider.value));
+
+        // HECC
+        const heccCanvas = document.getElementById('hyperellipticCurveCanvas');
+        const heccCtx = heccCanvas.getContext('2d');
+
+        const heaSlider = document.getElementById('hea');
+        const hebSlider = document.getElementById('heb');
+        const hecSlider = document.getElementById('hec');
+        const heaValue = document.getElementById('hea-value');
+        const hebValue = document.getElementById('heb-value');
+        const hecValue = document.getElementById('hec-value');
+
+        heaSlider.addEventListener('input', updateHECCurve);
+        hebSlider.addEventListener('input', updateHECCurve);
+        hecSlider.addEventListener('input', updateHECCurve);
+
+        function drawHyperellipticCurve(a, b, c) {
+            heccCtx.clearRect(0, 0, heccCanvas.width, heccCanvas.height);
+            heccCtx.beginPath();
+            for (let x = -10; x <= 10; x += 0.01) {
+                                let y = Math.sqrt(Math.pow(x, 5) + a * Math.pow(x, 3) + b * x + c);
+                let negY = -Math.sqrt(Math.pow(x, 5) + a * Math.pow(x, 3) + b * x + c);
+                if (!isNaN(y)) {
+                    heccCtx.moveTo(x * 30 + 300, -y * 30 + 200);
+                    heccCtx.lineTo(x * 30 + 300, -negY * 30 + 200);
+                }
+            }
+            heccCtx.strokeStyle = '#82aaff';
+            heccCtx.fillStyle = '#121212';
+            heccCtx.fill();
+            heccCtx.stroke();
+        }
+
+        function updateHECCurve() {
+            const a = parseFloat(heaSlider.value);
+            const b = parseFloat(hebSlider.value);
+            const c = parseFloat(hecSlider.value);
+            heaValue.textContent = a;
+            hebValue.textContent = b;
+            hecValue.textContent = c;
+            drawHyperellipticCurve(a, b, c);
+        }
+
+        // Initial draw
+        drawHyperellipticCurve(parseFloat(heaSlider.value), parseFloat(hebSlider.value), parseFloat(hecSlider.value));
+
+        // Mapping Animation
+        const mappingCanvas = document.getElementById('mappingCanvas');
+        const mappingCtx = mappingCanvas.getContext('2d');
+
+        const mapASlider = document.getElementById('mapA');
+        const mapBSlider = document.getElementById('mapB');
+        const mapCSlider = document.getElementById('mapC');
+        const mapAValue = document.getElementById('mapA-value');
+        const mapBValue = document.getElementById('mapB-value');
+        const mapCValue = document.getElementById('mapC-value');
+
+        mapASlider.addEventListener('input', updateMappingCurve);
+        mapBSlider.addEventListener('input', updateMappingCurve);
+        mapCSlider.addEventListener('input', updateMappingCurve);
+
+        function drawMappingCurve(a, b, c) {
+            mappingCtx.clearRect(0, 0, mappingCanvas.width, mappingCanvas.height);
+            mappingCtx.beginPath();
+            for (let x = -10; x <= 10; x += 0.01) {
+                let yHyper = Math.sqrt(Math.pow(x, 5) + a * Math.pow(x, 3) + b * x + c);
+                let negYHyper = -Math.sqrt(Math.pow(x, 5) + a * Math.pow(x, 3) + b * x + c);
+                let yElliptic = Math.sqrt(Math.pow(x, 3) + a * x + b);
+                let negYElliptic = -Math.sqrt(Math.pow(x, 3) + a * x + b);
+                if (!isNaN(yHyper)) {
+                    mappingCtx.moveTo(x * 30 + 300, -yHyper * 30 + 200);
+                    mappingCtx.lineTo(x * 30 + 300, -negYHyper * 30 + 200);
+                }
+                if (!isNaN(yElliptic)) {
+                    mappingCtx.moveTo(x * 30 + 300, -yElliptic * 30 + 200);
+                    mappingCtx.lineTo(x * 30 + 300, -negYElliptic * 30 + 200);
+                }
+            }
+            mappingCtx.strokeStyle = '#82aaff';
+            mappingCtx.fillStyle = '#121212';
+            mappingCtx.fill();
+            mappingCtx.stroke();
+        }
+
+        function updateMappingCurve() {
+            const a = parseFloat(mapASlider.value);
+            const b = parseFloat(mapBSlider.value);
+            const c = parseFloat(mapCSlider.value);
+            mapAValue.textContent = a;
+            mapBValue.textContent = b;
+            mapCValue.textContent = c;
+            drawMappingCurve(a, b, c);
+        }
+
+        // Initial draw
+        drawMappingCurve(parseFloat(mapASlider.value), parseFloat(mapBSlider.value), parseFloat(mapCSlider.value));
+
+        // Encryption Process
+        function encryptMessage() {
+            const inputMessage = document.getElementById('inputMessage').value;
+            const outputMessage = document.getElementById('outputMessage');
+            // A simple example encryption using base64 encoding for demonstration purposes.
+            // Replace with actual elliptic curve encryption method.
+            const encryptedMessage = btoa(inputMessage);
+            outputMessage.value = encryptedMessage;
+        }
+    });
+</script>
+
+</body>
+</html>
